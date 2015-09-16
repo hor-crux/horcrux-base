@@ -1,5 +1,6 @@
 declare module "horcrux-base" {
-class Model extends CustomAttribute {
+export {	Model,	Repeat,	Import}
+class Model extends CustomAttribute {
     static strategies: {
         [type: string]: typeof CustomAttribute;
     };
