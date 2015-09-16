@@ -16,7 +16,7 @@ export default class Repeat extends CustomAttribute {
 		this.createComment()
 		this.removeOriginalNode();
 		
-		this.newJSValue(model.get(path).value);
+		this.node = this.node.cloneNode(true);
 	}
 	
 	protected createComment(): void {
