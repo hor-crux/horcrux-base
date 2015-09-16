@@ -45,7 +45,7 @@ class InputModel extends CustomAttribute {
 	
 	newDOMValue(val:any):void {
 		this.pending = true;
-		this.model.set(val);
+		this.model.set(this.path, val);
 	}
 }
 
