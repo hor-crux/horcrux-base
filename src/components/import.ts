@@ -9,11 +9,11 @@ declare var System:any;
 export default class Import extends CustomElement {
 	
 	@created created() {
-		let src = super.getAttribute("from") || super.innerHTML;
+		let src = this.getAttribute("from") || this.innerHTML;
 		System.import(src);
 	}
 	
 	attachedCallback() {
-		super.remove();
+		this.remove();
 	}
 }

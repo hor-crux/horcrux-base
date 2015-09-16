@@ -5,7 +5,7 @@ class Model extends CustomAttribute {
         [type: string]: typeof CustomAttribute;
     };
     private strategy;
-    constructor(node: Node, attr: any, model: any, path: string);
+    constructor(node: Node, attr: any, model: DataModel, path: string);
     newJSValue(val: any): void;
     newDomValue(val: any): void;
     static register(type: string, model: typeof CustomAttribute): void;

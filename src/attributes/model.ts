@@ -1,4 +1,4 @@
-import {Attribute, CustomAttribute} from "horcrux-core";
+import {Attribute, CustomAttribute, Model as DataModel} from "horcrux-core";
 
 @Attribute
 export default class Model extends CustomAttribute {
@@ -6,7 +6,7 @@ export default class Model extends CustomAttribute {
 	
 	private strategy:CustomAttribute;
 	
-	constructor(node:Node, attr:any, model:any, path:string) {
+	constructor(node:Node, attr:any, model:DataModel, path:string) {
 		super(node, attr, model, path)
 		this.strategy = new Model.strategies[node.nodeName.toLowerCase()](node, attr, model, path);
 	}
@@ -28,7 +28,7 @@ class InputModel extends CustomAttribute {
 	
 	private pending = false;
 	
-	constructor(node:HTMLInputElement, attr:any, model:any, path:string) {
+	constructor(node:HTMLInputElement, attr:any, model:DataModel, path:string) {
 		super(node, attr, model, path);
 		
 		node.onkeyup = event => {
@@ -45,7 +45,7 @@ class InputModel extends CustomAttribute {
 	
 	newDOMValue(val:any):void {
 		this.pending = true;
-		this.model[this.path] = val;
+		this.model.set(val);
 	}
 }
 
