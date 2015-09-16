@@ -30,7 +30,8 @@ export default class Repeat extends CustomAttribute {
 	
 	protected removeOldNodes(): void {
 		let selector = '*[data-repeatid="'+this.ID+'"]';
-		Array.prototype.forEach.call(document.querySelectorAll(selector), (node:Node) => {
+		let root:any = this.commentNode.parentElement || this.commentNode.parentNode;
+		Array.prototype.forEach.call(root.querySelectorAll(selector), (node:Node) => {
 			node.parentNode.removeChild(node);
 		});
 	}
