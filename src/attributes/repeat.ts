@@ -1,4 +1,4 @@
-import {Attribute, CustomAttribute, Model, bind} from "horcrux-core"
+import {Attribute, CustomAttribute, Model, bindDom} from "horcrux-core"
 
 @Attribute
 export default class Repeat extends CustomAttribute {
@@ -49,7 +49,7 @@ export default class Repeat extends CustomAttribute {
 			delete row['repeat'];
 			row.dataSet['repeatid'] = this.ID;
 			
-			bind(row, [model]);
+			bindDom(row, [model]);
 			
 			nodes.push(row);
 		}

@@ -1,6 +1,5 @@
 declare module "horcrux-base" {
-export {	Model,	Repeat,	Import}
-class Model extends CustomAttribute {
+class Model extends CustomAttribute {
     static strategies: {
         [type: string]: typeof CustomAttribute;
     };
@@ -20,5 +19,9 @@ class Repeat extends CustomAttribute {
     protected removeOldNodes(): void;
     protected insertNode(node: Node): void;
     newJSValue(value: any): void;
+}
+class Import extends CustomElement {
+    created(): void;
+    attachedCallback(): void;
 }
 }

@@ -1,11 +1,11 @@
-import {Component, bind} from "horcrux-core"
+import {Component, bindDom, CustomElement} from "horcrux-core"
 
 @Component({
 	namespace: "ho",
 	template: false
 })
 class Repeat extends CustomElement {
-	
+	/*
 	dontVisit = true;
 	
 	attachedCallback() {
@@ -35,5 +35,6 @@ class Repeat extends CustomElement {
 			parent = parent.parentNode;
 		return (<any>parent).host;
 	}
+	*/
 	
 }

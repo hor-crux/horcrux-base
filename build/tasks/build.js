@@ -12,7 +12,7 @@ var sourcemap = require('gulp-sourcemaps')
 var typescript = require('gulp-typescript');
 
 
-var tsProject_js = typescript.createProject(paths.tsconfig, {typescript: require('typescript')});
+var tsProject_js = typescript.createProject(paths.tsconfig, {typescript: require('typescript'), noExternalResolve:false});
 var tsProject_dts = typescript.createProject(paths.tsconfig, {typescript: require('typescript'), declarationFiles:true});
 /**
  * Transpiles all .ts files from source directory to output directory
