@@ -1,4 +1,8 @@
+/// <reference path="../../typings/observe-js/observe-js.d.ts" />
+
+
 import {Attribute, CustomAttribute, Model, bindDom} from "horcrux-core"
+import {ArrayObserver, ObjectObserver} from "observejs"
 
 @Attribute
 export default class Repeat extends CustomAttribute {
@@ -7,6 +11,7 @@ export default class Repeat extends CustomAttribute {
 	
 	private ID:number;
 	private commentNode: Comment;
+	private observer: observejs.ArrayObserver_instance | observejs.ObjectObserver_instance;
 	
 	constructor(node:Node, attr:Attr, model:Model, path:string) {
 		super(node, attr, model, path);
@@ -40,7 +45,34 @@ export default class Repeat extends CustomAttribute {
 		this.commentNode.parentNode.insertBefore(node, this.commentNode.nextSibling);
 	}
 	
+	protected clearObserver() {
+		this.observer ? this.observer.close() : undefined;
+	}
+	
 	newJSValue(value):void {
+		this.renderList(value);
+		
+		this.clearObserver();
+		
+		if(value instanceof Array) {
+			let observer = new ArrayObserver(value);
+			observer.open(()=>{
+				this.renderList(value);
+			});
+			
+			this.observer = observer;
+		}
+		else if(value instanceof Object) {
+			let observer = new ObjectObserver(value);
+			observer.open(()=>{
+				this.renderList(value);
+			});
+			
+			this.observer = observer;
+		}
+	}
+	
+	protected renderList(value:any): void {
 		let nodes:Array<Node> = [];
 		
 		for(var key in value) {
@@ -61,6 +93,6 @@ export default class Repeat extends CustomAttribute {
 		nodes.reverse().forEach(n => {
 			this.insertNode(n);
 		});
-		
 	}
+	
 } 

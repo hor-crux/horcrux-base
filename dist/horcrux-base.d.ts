@@ -14,12 +14,15 @@ class Repeat extends CustomAttribute {
     static ID: number;
     private ID;
     private commentNode;
+    private observer;
     constructor(node: Node, attr: Attr, model: Model, path: string);
     protected createComment(): void;
     protected removeOriginalNode(): void;
     protected removeOldNodes(): void;
     protected insertNode(node: Node): void;
+    protected clearObserver(): void;
     newJSValue(value: any): void;
+    protected renderList(value: any): void;
 }
 class Import extends CustomElement {
     created(): void;
