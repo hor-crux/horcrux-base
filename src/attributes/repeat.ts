@@ -25,13 +25,13 @@ export default class Repeat extends CustomAttribute {
 	}
 	
 	protected removeOriginalNode(): void {
-		this.node.parentNode = void 0;
+		this.node.parentNode.removeChild(this.node);
 	}
 	
 	protected removeOldNodes(): void {
 		let selector = '*[data-repeatid="'+this.ID+'"]';
 		Array.prototype.forEach.call(document.querySelectorAll(selector), (node:Node) => {
-			node.parentNode = void 0;
+			node.parentNode.removeChild(node);
 		});
 	}
 	
