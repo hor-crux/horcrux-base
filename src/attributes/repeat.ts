@@ -47,7 +47,8 @@ export default class Repeat extends CustomAttribute {
 			
 			let row:any = this.node.cloneNode(true)	
 			delete row['repeat'];
-			row.dataSet['repeatid'] = this.ID;
+			row.removeAttribute('repeat');
+			row.dataset['repeatid'] = this.ID;
 			
 			bindDom(row, [model]);
 			
@@ -56,7 +57,7 @@ export default class Repeat extends CustomAttribute {
 		
 		this.removeOldNodes();
 		
-		nodes.forEach(n => {
+		nodes.reverse().forEach(n => {
 			this.insertNode(n);
 		});
 		
