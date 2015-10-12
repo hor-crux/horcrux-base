@@ -1,52 +1,35 @@
-import {Attribute, CustomAttribute, Model as DataModel} from "horcrux-core";
+import {Attribute, CustomAttribute, Model as DataModel, Binding} from "horcrux-core";
+import {ModelStrategy, ModelStrategyStatic} from "./modelinterface";
+
 
 @Attribute
-export default class Model extends CustomAttribute {
-	static strategies: {[type:string]:typeof CustomAttribute} = {};
+class Model extends CustomAttribute {
+	static strategies: {[type:string]:ModelStrategyStatic} = {};
 	
-	private strategy:CustomAttribute;
-	
-	constructor(node:Node, attr:any, model:DataModel, path:string) {
-		super(node, attr, model, path)
-		this.strategy = new Model.strategies[node.nodeName.toLowerCase()](node, attr, model, path);
+	protected init() {
+		new Model.strategies[this.node.nodeName.toLowerCase()]().init(this.node, this.binding);
 	}
 	
-	newJSValue(val:any):void {
-		this.strategy.newJSValue(val);
-	}
 	
-	newDomValue(val:any):void {
-		this.strategy.newDOMValue(val);
-	}
-	
-	static register(type:string, model:typeof CustomAttribute):void {
+	static register(type:string, model:ModelStrategyStatic):void {
 		Model.strategies[type.toLowerCase()] = model;
 	}
 }
 
-class InputModel extends CustomAttribute {
+
+class InputModel implements ModelStrategy {
 	
-	private pending = false;
-	
-	constructor(node:HTMLInputElement, attr:any, model:DataModel, path:string) {
-		super(node, attr, model, path);
-		
+	init(node:HTMLInputElement, binding:Binding): void {
 		node.onkeyup = event => {
-			this.newDOMValue(node.value);
+			binding.setNewValue(node.value);
 		}
-	}
-	
-	newJSValue(val:any):void {
-		if(this.pending)
-			this.pending = false;
-		else
-			(<HTMLInputElement>this.node).value = val;
-	}
-	
-	newDOMValue(val:any):void {
-		this.pending = true;
-		this.model.set(this.path, val);
+		
+		binding.onNewValue(value => {
+			node.value = value;
+		})
 	}
 }
 
 Model.register("INPUT", InputModel);
+
+export {Model}

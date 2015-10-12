@@ -5,7 +5,7 @@ import {Attribute, CustomAttribute, Model, bindDom} from "horcrux-core"
 import {ArrayObserver, ObjectObserver} from "observejs"
 
 @Attribute
-export default class Repeat extends CustomAttribute {
+class Repeat extends CustomAttribute {
 	
 	static ID = 0;
 	
@@ -13,15 +13,15 @@ export default class Repeat extends CustomAttribute {
 	private commentNode: Comment;
 	private observer: observejs.ArrayObserver_instance | observejs.ObjectObserver_instance;
 	
-	constructor(node:Node, attr:Attr, model:Model, path:string) {
-		super(node, attr, model, path);
-		
+	protected init(): void {
 		this.ID = Repeat.ID++;
 		
 		this.createComment()
 		this.removeOriginalNode();
 		
 		this.node = this.node.cloneNode(true);
+		
+		this.binding.onNewValue(this.onNewValue.bind(this));
 	}
 	
 	protected createComment(): void {
@@ -49,7 +49,7 @@ export default class Repeat extends CustomAttribute {
 		this.observer ? this.observer.close() : undefined;
 	}
 	
-	newJSValue(value):void {
+	protected onNewValue(value):void {
 		this.renderList(value);
 		
 		this.clearObserver();
@@ -96,3 +96,5 @@ export default class Repeat extends CustomAttribute {
 	}
 	
 } 
+
+export {Repeat}

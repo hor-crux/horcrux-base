@@ -1,16 +1,18 @@
-import {Component, CustomElement, created} from "horcrux-core"
+import {Component, CustomElement} from "horcrux-core"
 
 declare var System:any;
 
 @Component
-export default class HcImport extends CustomElement {
+class HcImport extends CustomElement {
 	
-	@created created() {
+	created() {
 		let src = this.getAttribute("from") || this.innerHTML;
 		System.import(src);
 	}
 	
-	attachedCallback() {
+	attached() {
 		this.remove();
 	}
 }
+
+ export {HcImport}

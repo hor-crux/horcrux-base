@@ -15,7 +15,7 @@ System.config({
     "github:hor-crux/horcrux-core@master": {
       "html": "github:hor-crux/html@master",
       "observejs": "github:polymer/observe-js@0.5.6",
-      "webcomponents": "github:webcomponents/webcomponentsjs@0.7.12"
+      "webcomponents": "github:webcomponents/webcomponentsjs@0.7.14"
     },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
