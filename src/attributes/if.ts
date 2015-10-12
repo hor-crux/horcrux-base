@@ -23,7 +23,7 @@ class If extends CustomAttribute {
 			this.shown = false;
 		}
 		else if(!this.shown && !!value) {
-			this.commentNode.insertBefore(this.node, this.commentNode.nextSibling);
+			this.commentNode.parentNode.insertBefore(this.node, this.commentNode.nextSibling);
 			this.shown = true;
 			
 		}
