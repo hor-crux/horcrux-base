@@ -26,7 +26,7 @@ class InputModel implements ModelStrategy {
 		
 		binding.onNewValue(value => {
 			node.value = value;
-		})
+		}, false)
 	}
 }
 
