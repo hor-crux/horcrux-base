@@ -31,6 +31,7 @@ interface ModelStrategyStatic {
     protected commentNode: Comment;
     protected shown: boolean;
     protected init(): void;
+    protected onNewValue(value: any): void;
 }
  class HcImport extends CustomElement {
     created(): void;

@@ -14,17 +14,19 @@ class If extends CustomAttribute {
 		this.node.parentNode.insertBefore(this.commentNode, this.node);
 		this.node.parentNode.removeChild(this.node);
 		
-		this.binding.onNewValue(value => {
-			if(this.shown && !value) {
-				this.node.parentNode.removeChild(this.node);
-				this.shown = false;
-			}
-			else if(!this.shown && !!value) {
-				this.commentNode.insertBefore(this.node, this.commentNode.nextSibling);
-				this.shown = true;
-				
-			}
-		}, false);
+		this.binding.onNewValue(this.onNewValue, this, false);
+	}
+	
+	protected onNewValue(value:any): void {
+		if(this.shown && !value) {
+			this.node.parentNode.removeChild(this.node);
+			this.shown = false;
+		}
+		else if(!this.shown && !!value) {
+			this.commentNode.insertBefore(this.node, this.commentNode.nextSibling);
+			this.shown = true;
+			
+		}
 	}
 	
 	
