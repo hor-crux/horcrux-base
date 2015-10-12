@@ -1,5 +1,5 @@
 declare module "horcrux-base" {
-export {	Model,	Repeat,	HcImport}
+export {	Model,	Repeat,	HcImport,	If}
 interface ModelStrategy {
     init(node: Node, binding: Binding): any;
 }
@@ -26,6 +26,11 @@ interface ModelStrategyStatic {
     protected clearObserver(): void;
     protected onNewValue(value: any): void;
     protected renderList(value: any): void;
+}
+ class If extends CustomAttribute {
+    protected commentNode: Comment;
+    protected shown: boolean;
+    protected init(): void;
 }
  class HcImport extends CustomElement {
     created(): void;
