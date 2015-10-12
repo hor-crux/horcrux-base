@@ -34,7 +34,8 @@ interface ModelStrategyStatic {
     protected onNewValue(value: any): void;
 }
  class HcImport extends CustomElement {
-    created(): void;
+    static pending: {};
+    static 
     attached(): void;
 }
 }
