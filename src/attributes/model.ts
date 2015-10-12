@@ -19,13 +19,19 @@ class Model extends CustomAttribute {
 
 class InputModel implements ModelStrategy {
 	
+	private pending = false;
+	
 	init(node:HTMLInputElement, binding:Binding): void {
 		node.onkeyup = event => {
+			this.pending = true;
 			binding.setNewValue(node.value);
 		}
 		
 		binding.onNewValue(value => {
-			node.value = value;
+			if(!!this.pending)
+				this.pending = false;
+			else
+				node.value = value;
 		}, false)
 	}
 }
