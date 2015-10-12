@@ -14,7 +14,7 @@ class If extends CustomAttribute {
 		this.node.parentNode.insertBefore(this.commentNode, this.node);
 		this.node.parentNode.removeChild(this.node);
 		
-		this.binding.onNewValue(this.onNewValue, this, false);
+		this.binding.onNewValue(this.onNewValue.bind(this), false);
 	}
 	
 	protected onNewValue(value:any): void {
