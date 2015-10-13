@@ -19,7 +19,10 @@ class Repeat extends CustomAttribute {
 		this.createComment()
 		this.removeOriginalNode();
 		
+		let originalNode:any = this.node;
 		this.node = this.node.cloneNode(true);
+		originalNode.dontVisit = true;
+		
 		
 		this.binding.onNewValue(this.onNewValue.bind(this));
 	}
