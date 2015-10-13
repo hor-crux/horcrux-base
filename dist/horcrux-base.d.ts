@@ -1,5 +1,6 @@
 declare module "horcrux-base" {
-export {	Model,	Repeat,	HcImport,	If}
+import {Binding, CustomAttribute, CustomElement} from "horcrux-core"
+export {	Model,	Repeat,	HcImport,	If}
 interface ModelStrategy {
     init(node: Node, binding: Binding): any;
 }
@@ -35,7 +36,7 @@ interface ModelStrategyStatic {
 }
  class HcImport extends CustomElement {
     static pending: {};
-    static 
+    static import(element: HcImport, src: string): void;
     attached(): void;
 }
 }

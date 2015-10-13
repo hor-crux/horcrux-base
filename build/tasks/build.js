@@ -42,6 +42,9 @@ gulp.task('build:html', function() {
 gulp.task('build:d.ts', function() {
   var tsSource = paths.source + '/**/*.ts'
   var mainFile = paths.source + '/' + packagejson.name + '.ts'
+  
+  var importsFile = paths.source + '/' + packagejson.name + '.imports.d.ts'
+  
   var outDTS = packagejson.name + '.d.ts';
   
   var srcDts = gulp.src([tsSource, '!**/*.d.ts'])
@@ -52,17 +55,18 @@ gulp.task('build:d.ts', function() {
   .pipe(replace(/declare/gm, ""));
   
   
-  var mainDts = gulp.src(mainFile)
+  var mainDts = gulp.src(mainFile);
+  var importDts = gulp.src(importsFile)
   
-  merge(mainDts, srcDts)
+  merge(importDts, mainDts, srcDts)
   .pipe(concat(outDTS))
   .pipe(wrap('declare module "' + packagejson.name + '" {\n<%= contents %>\n}'))
-  .pipe(replace(/import.*/gm, ""))
+  .pipe(replace(/^\s*import.*/gm, ""))
+  .pipe(replace(/!\s*import/gm, "import"))
   .pipe(replace(/\/\/.*/gm, ""))
   .pipe(replace(/^\n/gm, ""))
   .pipe(replace(/\n\n/gm, "\n"))
   .pipe(replace(/(^[ \t]*\n)/gm, ""))
-  
   .pipe(gulp.dest(paths.output));
 });
 
