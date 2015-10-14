@@ -7,6 +7,7 @@ import {ArrayObserver, ObjectObserver} from "observejs"
 @Attribute
 class Repeat extends CustomAttribute {
 	
+	static precedence = 1;
 	static ID = 0;
 	
 	private ID:number;

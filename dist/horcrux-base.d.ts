@@ -1,6 +1,6 @@
 declare module "horcrux-base" {
-import {Binding, CustomAttribute, CustomElement} from "horcrux-core"
 export {	Model,	Repeat,	HcImport,	If}
+import {Binding, CustomAttribute, CustomElement} from "horcrux-core"
 interface ModelStrategy {
     init(node: Node, binding: Binding): any;
 }
@@ -15,6 +15,7 @@ interface ModelStrategyStatic {
     static register(type: string, model: ModelStrategyStatic): void;
 }
  class Repeat extends CustomAttribute {
+    static precedence: number;
     static ID: number;
     private ID;
     private commentNode;
