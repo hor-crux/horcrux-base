@@ -13,9 +13,16 @@ System.config({
     "horcrux-core": "github:hor-crux/horcrux-core@master",
     "observejs": "github:polymer/observe-js@0.5.6",
     "github:hor-crux/horcrux-core@master": {
+      "horcrux-event": "github:hor-crux/horcrux-event@master",
       "html": "github:hor-crux/html@master",
       "observejs": "github:polymer/observe-js@0.5.6",
       "webcomponents": "github:webcomponents/webcomponentsjs@0.7.14"
+    },
+    "github:hor-crux/horcrux-di@master": {
+      "horcrux-core": "github:hor-crux/horcrux-core@master"
+    },
+    "github:hor-crux/horcrux-event@master": {
+      "horcrux-di": "github:hor-crux/horcrux-di@master"
     },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"

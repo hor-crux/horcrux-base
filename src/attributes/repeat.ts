@@ -86,7 +86,7 @@ class Repeat extends CustomAttribute {
 			row.removeAttribute('repeat');
 			row.dataset['repeatid'] = this.ID;
 			
-			bindDom(row, [model]);
+			bindDom(row, [model].concat(this.model.objects));
 			
 			nodes.push(row);
 		}

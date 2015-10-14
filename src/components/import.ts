@@ -20,10 +20,6 @@ class HcImport extends CustomElement {
 	created() {
 		let src = this.getAttribute("from") || this.innerHTML;
 		let promise = HcImport.import(this, src);
-		
-		if(this.hasAttribute("wait")) {
-			this.parentComponent.beforeBinding.push(promise);
-		}
 	}
 	
 }
