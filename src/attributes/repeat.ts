@@ -19,8 +19,11 @@ class Repeat extends CustomAttribute {
 		this.createComment()
 		this.removeOriginalNode();
 		
+		/*
 		(<Element>this.node).setAttribute("dontVisit", "");
 		this.node = this.node.cloneNode(true);
+		*/
+		(<any>this.node).setAttribute("lazy", "");
 		
 		
 		this.binding.onNewValue(this.onNewValue.bind(this));
