@@ -1,7 +1,7 @@
 /// <reference path="../../typings/observe-js/observe-js.d.ts" />
 
 
-import {Attribute, CustomAttribute, Model, bindDom} from "horcrux-core"
+import {Attribute, CustomAttribute, Model, bindDom, ComponentCanBindEvent} from "horcrux-core"
 import {ArrayObserver, ObjectObserver} from "observejs"
 
 @Attribute
@@ -88,9 +88,13 @@ class Repeat extends CustomAttribute {
 			row.removeAttribute('repeat');
 			row.dataset['repeatid'] = this.ID;
 			
-			row.removeAttribute("dontVisit");
-			
 			bindDom(row, [model].concat(this.model.objects));
+			row.removeAttribute("lazy");
+			[].filter.call(row.querySelectorAll("*"), e=> {
+				return e.nodeName.indexOf("-") > -1
+			}).forEach(e => {
+				e.eventBus.dispatch(new ComponentCanBindEvent())
+			})
 			
 			nodes.push(row);
 		}
