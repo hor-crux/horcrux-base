@@ -90,11 +90,17 @@ class Repeat extends CustomAttribute {
 			
 			bindDom(row, [model].concat(this.model.objects));
 			row.removeAttribute("lazy");
-			[].filter.call(row.querySelectorAll("*"), e=> {
-				return e.nodeName.indexOf("-") > -1
-			}).forEach(e => {
-				e.eventBus.dispatch(new ComponentCanBindEvent([model].concat(this.model.objects)))
-			})
+			
+			if(!!row.eventBus) {
+				row.eventBus.dispatch(new ComponentCanBindEvent([model].concat(this.model.objects)))	
+			}
+			else {
+				[].filter.call(row.querySelectorAll("*"), e=> {
+					return e.nodeName.indexOf("-") > -1
+				}).forEach(e => {
+					e.eventBus.dispatch(new ComponentCanBindEvent([model].concat(this.model.objects)))
+				})
+			}
 			
 			nodes.push(row);
 		}
