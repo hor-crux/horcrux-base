@@ -19,9 +19,8 @@ class Repeat extends CustomAttribute {
 		this.createComment()
 		this.removeOriginalNode();
 		
-		let originalNode:any = this.node;
+		(<Element>this.node).setAttribute("dontVisit", "");
 		this.node = this.node.cloneNode(true);
-		originalNode.dontVisit = true;
 		
 		
 		this.binding.onNewValue(this.onNewValue.bind(this));
@@ -85,6 +84,8 @@ class Repeat extends CustomAttribute {
 			delete row['repeat'];
 			row.removeAttribute('repeat');
 			row.dataset['repeatid'] = this.ID;
+			
+			row.removeAttribute("dontVisit");
 			
 			bindDom(row, [model].concat(this.model.objects));
 			
