@@ -30,9 +30,14 @@ class InputModel implements ModelStrategy {
 		binding.onNewValue(value => {
 			if(!!this.pending)
 				this.pending = false;
-			else
+			else {
+				value =
+					value === undefined ? '' :
+					value === null ? '' :
+					value 
 				node.value = value;
-		}, false)
+			}
+		})
 	}
 }
 

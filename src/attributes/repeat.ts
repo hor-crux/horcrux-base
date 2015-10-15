@@ -81,8 +81,12 @@ class Repeat extends CustomAttribute {
 	protected renderList(value:any): void {
 		let nodes:Array<Node> = [];
 		
+		let $index = 0;
 		for(var key in value) {
-			let model = {it: value[key]};
+			let model = {
+				it: value[key],
+				$index: $index				
+			};
 			
 			let row:any = this.node.cloneNode(true)	
 			delete row['repeat'];
