@@ -32,6 +32,8 @@ interface ModelStrategyStatic {
  class If extends CustomAttribute {
     protected commentNode: Comment;
     protected shown: boolean;
+    protected negate: boolean;
+    protected createBinding(): void;
     protected init(): void;
     protected onNewValue(value: any): void;
 }

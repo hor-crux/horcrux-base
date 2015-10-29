@@ -7,6 +7,15 @@ class If extends CustomAttribute {
 	
 	protected commentNode: Comment;
 	protected shown = false;
+	protected negate = false;
+	
+	protected createBinding(): void {
+		if(this.attr.value.trim()[0] == "!") {
+			this.negate = true;
+			this.attr.value = this.attr.value.trim().substring(1); 
+		}
+		super.createBinding();
+	}
 	
 	protected init() {
 		
