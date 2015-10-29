@@ -10,7 +10,7 @@ class If extends CustomAttribute {
 	protected negate = false;
 	
 	protected createBinding(): void {
-		let negation = !!/\s*\{\{\s*!/.match(this.attr.value).length;
+		let negation = !! this.attr.value.match(/\s*\{\{\s*!/);
 		if(negation) {
 			this.negate = true;
 			this.attr.value = this.attr.value.replace(/\s*\{\{\s*!/, "{{"); 
