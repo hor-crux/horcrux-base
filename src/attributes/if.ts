@@ -7,13 +7,16 @@ class If extends CustomAttribute {
 	
 	protected commentNode: Comment;
 	protected shown = false;
-	protected negate = false;
+	protected negate: boolean;
 	
 	protected createBinding(): void {
 		let negation = !! this.attr.value.match(/\s*\{\{\s*!/);
 		if(negation) {
 			this.negate = true;
 			this.attr.value = this.attr.value.replace(/\s*\{\{\s*!/, "{{"); 
+		}
+		else {
+			this.negate = false;
 		}
 		super.createBinding();
 	}
