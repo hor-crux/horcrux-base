@@ -28,6 +28,9 @@ class If extends CustomAttribute {
 	}
 	
 	protected onNewValue(value:any): void {
+		if(this.negate)
+			value = !value;
+			
 		if(this.shown && !value) {
 			this.node.parentNode.removeChild(this.node);
 			this.shown = false;
