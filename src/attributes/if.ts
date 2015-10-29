@@ -10,9 +10,10 @@ class If extends CustomAttribute {
 	protected negate = false;
 	
 	protected createBinding(): void {
-		if(this.attr.value.trim()[0] == "!") {
+		let negation = !!/\s*\{\{\s*!/.match(this.attr.value).length;
+		if(negation) {
 			this.negate = true;
-			this.attr.value = this.attr.value.trim().substring(1); 
+			this.attr.value = this.attr.value.replace(/\s*\{\{\s*!/, "{{"); 
 		}
 		super.createBinding();
 	}
